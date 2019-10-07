@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="right"
+            android:background="#00FFFFFF"
+            android:text="완료"
+            android:id="@+id/btnSaveMemo"
+            />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/memoNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="001" />
+
+        <EditText
+            android:id="@+id/memoBookTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="여행의 이유"/>
+
+        <EditText
+            android:id="@+id/memoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="여행의 이유를 읽고,"/>
+
+        <EditText
+            android:id="@+id/memoDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2019년 9월 1일"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+            <EditText
+                android:id="@+id/memoContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="메모 할 내용을 입력하세요:)"
+                android:background="@null" />
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/btnTakePhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:textAlignment="textStart"
+                android:background="#00FFFFFF"
+                android:text="카메라" />
+
+            <Button
+                android:id="@+id/btnGoToAlbum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="30dp"
+                android:textAlignment="textEnd"
+                android:background="#00FFFFFF"
+                android:text="사진" />
+
+            <Button
+                android:id="@+id/btnOCR"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:textAlignment="textStart"
+                android:background="#00FFFFFF"
+                android:text="OCR" />
+
+            <Button
+                android:id="@+id/btnDraw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="30dp"
+                android:textAlignment="textEnd"
+                android:background="#00FFFFFF"
+                android:text="그리기" />
+        </LinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

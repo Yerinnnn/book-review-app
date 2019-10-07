@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B3AAAAAA"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/camera"></ImageView>
+
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:background="#00111111"
+            android:text="카메라로 사진찍기"
+            android:textSize="18dp">
+
+
+        </Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/picture"></ImageView>
+
+        <Button
+            android:id="@+id/btnPicture"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:background="#00111111"
+            android:text="앨범에서 사진 선택"
+            android:textSize="18dp" />
+    </LinearLayout>
+</LinearLayout>
