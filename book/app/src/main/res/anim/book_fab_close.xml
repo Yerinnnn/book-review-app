@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+    <scale
+        android:duration="300"
+        android:fromXScale="0.8"
+        android:fromYScale="0.8"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="0.0"
+        android:toYScale="0.0" />
+    <alpha
+        android:duration="300"
+        android:fromAlpha="1.0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toAlpha="0.0" />
+
+</set>
+<!--
+◎ fromXScale : 시작하는 X 의 크기
+◎ toXScale : 끝나는 시점의 X 크기
+◎ fromYScale : 시작하는 Y 의 크기
+◎ toYScale : 끝나는 시점의 Y 크기
+◎ pivotX : X 좌표의 중심점
+◎ pivotY : Y 좌표의 중심점
+◎ duration : 애니메이션 적용 시간
+◎ repeatCount : 반복 횟수
+◎ repeatMode : 반복시 다시 생성될 때 방향
+-->

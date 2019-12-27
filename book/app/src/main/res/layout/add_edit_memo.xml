@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/add_edit_memo"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSaveMemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textAlignment="textEnd"
+            android:background="#00FFFFFF"
+            android:text="완료"
+            android:fontFamily="@font/dream3"
+            android:textSize="13dp" />
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:visibility="gone" />-->
+<!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="책 제목"
+                android:fontFamily="@font/dream3"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/memoContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="메모 할 내용을 입력하세요 :)"
+                android:fontFamily="@font/dream3"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent">-->
+
+        <!--            <androidx.recyclerview.widget.RecyclerView-->
+        <!--                android:id="@+id/memoList"-->
+        <!--                android:layout_width="80dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:padding="10dp">-->
+        <!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+        <!--            <Button-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:background="#00FFFFFF"-->
+        <!--                android:text="+"-->
+        <!--                android:textSize="40dp"-->
+        <!--                android:layout_width="60dp"-->
+        <!--                android:layout_height="60dp"/>-->
+        <!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:text="카메라"
+            android:fontFamily="@font/dream4"
+            android:textAlignment="textStart"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btnAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:text="사진"
+            android:fontFamily="@font/dream4"
+            android:textAlignment="textEnd"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btnOCR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:text="OCR"
+            android:fontFamily="@font/dream4"
+            android:textAlignment="textStart"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btnDraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:text="그리기"
+            android:fontFamily="@font/dream4"
+            android:textAlignment="textEnd"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+
+</LinearLayout>
