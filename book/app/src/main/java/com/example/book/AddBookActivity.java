@@ -66,9 +66,9 @@ public class AddBookActivity extends Activity {
     private TextView bookComment;
     private Button btnSave;
 
-    private Boolean isPermission = true;
-
     private static final String TAG = "AddBookActivity";
+
+    private Boolean isPermission = true;
 
     private static final int PICK_FROM_ALBUM = 1;
     private static final int PICK_FROM_CAMERA = 2;
@@ -76,7 +76,6 @@ public class AddBookActivity extends Activity {
     private File tempFile;
 
     private static final int REQUEST_CODE = 0;
-    private Uri uri;
     private Uri savingUri;
 
     private Boolean isCamera = false;
@@ -391,9 +390,7 @@ public class AddBookActivity extends Activity {
 //    }
 
 
-    /**
-     * 앨범에서 이미지 가져오기
-     */
+    // 앨범에서 이미지 가져오기
     private void goToAlbum() {
         isCamera = false;
 
@@ -408,9 +405,7 @@ public class AddBookActivity extends Activity {
     }
 
 
-    /**
-     * 카메라에서 이미지 가져오기
-     */
+    // 카메라에서 이미지 가져오기
     private void takePhoto() {
         isCamera = true;
 
@@ -503,9 +498,7 @@ public class AddBookActivity extends Activity {
         Crop.of(photoUri, savingUri).withAspect(115, 160).start(this);
     }
 
-    /**
-     * 폴더 및 파일 만들기
-     */
+    // 폴더 및 파일 만들기
     private File createImageFile() throws IOException {
 
         // 이미지 파일 이름 ( book_{시간}_ )
@@ -529,9 +522,7 @@ public class AddBookActivity extends Activity {
     }
 
 
-    /**
-     * tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
-     */
+    // tempfile을 bitmap으로 변환 후 imageview에 setImage
     private void setImage() {
 //        ImageResizeUtils.resizeFile(tempFile, tempFile, 1280, isCamera);
 //
@@ -543,18 +534,14 @@ public class AddBookActivity extends Activity {
 
         bookCover.setImageURI(savingUri);
 
-        /**
-         *  tempFile 사용 후 null 처리를 해줘야 함
-         *  (resultCode != RESULT_OK) 일 때 tempFile 을 삭제하기 때문에
-         *  기존에 데이터가 남아 있게 되면 원치 않은 삭제가 이루어질 수 있음
-         */
+        // tempFile 사용 후 null 처리가 필요
+        // (resultCode != RESULT_OK) 일 때 tempFile 을 삭제하기 때문에
+        // 기존에 데이터가 남아있게 되면 원치 않은 삭제가 이루어질 수 있음
         tempFile = null;
 
     }
 
-    /**
-     * 권한 설정
-     */
+    // 권한 설정
     private void tedPermission() {
 
         PermissionListener permissionListener = new PermissionListener() {

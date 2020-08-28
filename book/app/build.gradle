@@ -28,6 +28,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0'
+
+    // tedpermission
     implementation 'gun0912.ted:tedpermission:2.0.0'
 
     // floating button
@@ -37,7 +39,7 @@ dependencies {
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
 
     // image to text google library
-    implementation 'com.rmtheis:tess-two:9.0.0'
+    implementation 'com.rmtheis:tess-two:9.1.0'
 
     // 반응형 레이아웃
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
