@@ -20,7 +20,7 @@ public class MemoContent extends Activity {
     private String mDate;
     private String mContent;
 
-    public byte[] bCover;
+    public String bCover;
     public String bScore;
     public String bTitle;
     public String bWriter;
@@ -41,7 +41,7 @@ public class MemoContent extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_content);
 
-        bCover = getIntent().getByteArrayExtra("bCover");
+        bCover = getIntent().getStringExtra("bCover");
         bScore = getIntent().getStringExtra("bScore");
         bTitle = getIntent().getStringExtra("bTitle");
         bWriter = getIntent().getStringExtra("bWriter");

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,8 +12,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +28,10 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,7 +53,7 @@ public class AddBookActivity extends Activity {
     private String bStartDate;
     private String bFinishDate;
     private String bComment;
-    private byte[] bCover;
+    private String bCover;
 
     private ImageView bookCover;
     private RatingBar bookRatingBar;
@@ -68,6 +74,10 @@ public class AddBookActivity extends Activity {
     private static final int PICK_FROM_CAMERA = 2;
 
     private File tempFile;
+
+    private static final int REQUEST_CODE = 0;
+    private Uri uri;
+    private Uri savingUri;
 
     private Boolean isCamera = false;
 
@@ -154,7 +164,7 @@ public class AddBookActivity extends Activity {
                     Bitmap bitmap = bitmapDrawable.getBitmap();
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    bCover = stream.toByteArray();
+                    bCover = savingUri.toString();
                 }
 
                 bookDbHelper.bInsert(bScore, bTitle, bWriter, bPublisher, bStartDate, bFinishDate, bComment, bCover);
@@ -390,6 +400,11 @@ public class AddBookActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
+
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(intent, REQUEST_CODE);
     }
 
 
@@ -431,7 +446,7 @@ public class AddBookActivity extends Activity {
         if (resultCode != RESULT_OK) {
             Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
 
-            if(tempFile != null) {
+            if (tempFile != null) {
                 if (tempFile.exists()) {
 
                     if (tempFile.delete()) {
@@ -446,7 +461,6 @@ public class AddBookActivity extends Activity {
 
         switch (requestCode) {
             case PICK_FROM_ALBUM: {
-
                 Uri photoUri = data.getData();
                 Log.d(TAG, "PICK_FROM_ALBUM photoUri : " + photoUri);
 
@@ -454,15 +468,15 @@ public class AddBookActivity extends Activity {
 
                 break;
             }
-            case PICK_FROM_CAMERA: {
-
-                Uri photoUri = Uri.fromFile(tempFile);
-                Log.d(TAG, "takePhoto photoUri : " + photoUri);
-
-                cropImage(photoUri);
-
-                break;
-            }
+//            case PICK_FROM_CAMERA: {
+//
+//                Uri photoUri = Uri.fromFile(tempFile);
+//                Log.d(TAG, "takePhoto photoUri : " + photoUri);
+//
+//                cropImage(photoUri);
+//
+//                break;
+//            }
             case Crop.REQUEST_CROP: {
                 //File cropFile = new File(Crop.getOutput(data).getPath());
                 setImage();
@@ -473,24 +487,18 @@ public class AddBookActivity extends Activity {
 
     // 이미지 crop
     private void cropImage(Uri photoUri) {
-
-        Log.d(TAG, "cropImage tempFile : " + tempFile);
-
-        /**
-         *  갤러리에서 선택한 경우에는 tempFile 이 없으므로 새로 생성해야함
-         */
-        if (tempFile == null) {
-            try {
-                tempFile = createImageFile();
-            } catch (IOException e) {
-                Toast.makeText(this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-                finish();
-                e.printStackTrace();
-            }
+//
+//      // 갤러리에서 선택한 경우에는 tempFile 이 없으므로 새로 생성해야함
+        try {
+            tempFile = createImageFile();
+        } catch (IOException e) {
+            Toast.makeText(this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+            finish();
+            e.printStackTrace();
         }
-
-        //크롭 후 저장할 Uri
-        Uri savingUri = Uri.fromFile(tempFile);
+//
+//        //크롭 후 저장할 Uri
+        savingUri = Uri.fromFile(tempFile);
 
         Crop.of(photoUri, savingUri).withAspect(115, 160).start(this);
     }
@@ -503,32 +511,37 @@ public class AddBookActivity extends Activity {
         // 이미지 파일 이름 ( book_{시간}_ )
         String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
         String imageFileName = "book_" + timeStamp + "_";
+        Log.d(TAG, "createImageFile: imageFileName: " + imageFileName);
 
         // 이미지가 저장될 폴더 이름 ( book )
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/book/");
+//        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//                + File.separator + "/book/");
         if (!storageDir.exists()) storageDir.mkdirs();
+        Log.d(TAG, "createImageFile: storageDir: " + storageDir);
 
         // 파일 생성
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        File image = new File (storageDir + imageFileName + ".jpg");
+//        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
         Log.d(TAG, "createImageFile : " + image.getAbsolutePath());
 
         return image;
     }
 
+
     /**
      * tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
      */
     private void setImage() {
-        ImageView imageView = findViewById(R.id.bookCover);
+//        ImageResizeUtils.resizeFile(tempFile, tempFile, 1280, isCamera);
+//
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
+//        Log.d(TAG, "setImage : " + originalBm + "======================================================================");
+//
+//        bookCover.setImageBitmap(originalBm);
 
-        ImageResizeUtils.resizeFile(tempFile, tempFile, 1280, isCamera);
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
-        Log.d(TAG, "setImage : " + originalBm + "======================================================================");
-
-        imageView.setImageBitmap(originalBm);
-
+        bookCover.setImageURI(savingUri);
 
         /**
          *  tempFile 사용 후 null 처리를 해줘야 함
@@ -562,8 +575,8 @@ public class AddBookActivity extends Activity {
 
         TedPermission.with(this)
                 .setPermissionListener(permissionListener)
-//                .setRationaleMessage(getResources().getString(R.string.permission_2))
-//                .setDeniedMessage(getResources().getString(R.string.permission_1))
+                .setRationaleMessage(getResources().getString(R.string.permission_2))
+                .setDeniedMessage(getResources().getString(R.string.permission_1))
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .check();
 

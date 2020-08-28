@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:start="2dp"
+        android:end="2dp"
+        android:top="2dp"
+        android:bottom="2dp">
+        <shape android:shape="rectangle"> // 테두리 모양:사각형
+            <stroke
+                android:width="3dp"
+                android:color="@color/colorAccent"/> // 테두리 두께, 색
+<!--            <solid android:color="#FBECBC" /> // 테두리 내부의 색-->
+        </shape>
+    </item>
+</layer-list>

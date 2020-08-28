@@ -25,7 +25,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
         /* 이름: book, 자동으로 값 증가하는 _id 정수형 기본키, bScore 책 평점 문자열 컬럼, bTitle 책 제목 문자열 컬럼, bWriter 저자 문자열 컬럼,
         bPublisher 출판사 문자열 컬럼, bSatrtDate 읽기 시작한 날 문자열 컬럼, bFinishDate 다 읽은 날 문자열 컬럼, bComment 한줄평 문자열 컬럼으로 구성된 테이블을 생성. */
         db.execSQL("CREATE TABLE book (_id INTEGER PRIMARY KEY AUTOINCREMENT, bScore TEXT, bTitle TEXT, bWriter TEXT, " +
-            "bPublisher TEXT, bStartDate TEXT, bFinishDate TEXT, bComment TEXT, bCover BLOB)");
+            "bPublisher TEXT, bStartDate TEXT, bFinishDate TEXT, bComment TEXT, bCover TEXT)");
 //        , bDate Text not null
 }
 
@@ -39,7 +39,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
 //        onCreate(db);
     }
 
-    public void bInsert(String bScore, String bTitle, String bWriter, String bPublisher, String bStartDate, String bFinishDate, String bComment, byte[] bCover) {
+    public void bInsert(String bScore, String bTitle, String bWriter, String bPublisher, String bStartDate, String bFinishDate, String bComment, String bCover) {
         // 읽고 쓰기가 가능하게 DB 열기
         SQLiteDatabase db = getWritableDatabase();
         String query = "INSERT INTO book VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -53,7 +53,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
         sqLiteStatement.bindString(6, bStartDate);
         sqLiteStatement.bindString(7, bFinishDate);
         sqLiteStatement.bindString(8, bComment);
-        sqLiteStatement.bindBlob(9, bCover);
+        sqLiteStatement.bindString(9, bCover);
 
         sqLiteStatement.execute();
 
@@ -61,7 +61,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void bUpdate(String bScore, String bTitle, String bWriter, String bPublisher, String bStartDate, String bFinishDate, String bComment, byte[] bCover) {
+    public void bUpdate(String bScore, String bTitle, String bWriter, String bPublisher, String bStartDate, String bFinishDate, String bComment, String bCover) {
         SQLiteDatabase db = getWritableDatabase();
         // 입력한 항목과 일치하는 행의 가격 정보 수정
         db.execSQL("UPDATE book SET bScore='" + bScore + "', bTitle='" + bTitle + "', bWriter='" + bWriter + "', bPublisher='" + bPublisher + "'," +
@@ -79,7 +79,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
     public ArrayList<BookCoverList> bGetBookCoverScore() {
         SQLiteDatabase db = getReadableDatabase();
         String bScore = null;
-        byte[] bCover = null;
+        String bCover = null;
         ArrayList<BookCoverList> list = new ArrayList<>();
 
         // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
@@ -87,7 +87,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()) {
             bScore = cursor.getString(0);
-            bCover = cursor.getBlob(1);
+            bCover = cursor.getString(1);
 
             BookCoverList results = new BookCoverList(bScore, bCover);
             list.add(results);
@@ -105,7 +105,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
         String bStartDate = null;
         String bFinishDate = null;
         String bComment = null;
-        byte[] bCover = null;
+        String bCover = null;
         ArrayList<Book> list = new ArrayList<>();
 
         // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
@@ -119,7 +119,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
             bStartDate = cursor.getString(5);
             bFinishDate = cursor.getString(6);
             bComment = cursor.getString(7);
-            bCover = cursor.getBlob(8);
+            bCover = cursor.getString(8);
 
             Book results = new Book(bScore, bTitle, bWriter, bPublisher, bStartDate, bFinishDate, bComment, bCover);
             list.add(results);

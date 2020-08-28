@@ -4,17 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.List;
 
-import static com.gun0912.tedpermission.TedPermission.TAG;
-
-//import static com.google.android.gms.vision.L.TAG;
+import static android.content.ContentValues.TAG;
 
 public class MemoDBHelper extends SQLiteOpenHelper {
 

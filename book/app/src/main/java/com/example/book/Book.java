@@ -8,9 +8,9 @@ public class Book {
     private String bStartDate;
     private String bFinishDate;
     private String bComment;
-    private byte[] bCover;
+    private String bCover;
 
-    public Book(String bScore, String bTitle, String bWriter, String bPublisher, String bStartDate, String bFinishDate, String bComment, byte[] bCover) {
+    public Book(String bScore, String bTitle, String bWriter, String bPublisher, String bStartDate, String bFinishDate, String bComment, String bCover) {
         this.bScore = bScore;
         this.bTitle = bTitle;
         this.bWriter = bWriter;
@@ -77,11 +77,11 @@ public class Book {
         this.bComment = bComment;
     }
 
-    public byte[] getbCover() {
+    public String getbCover() {
         return bCover;
     }
 
-    public void setbCover(byte[] bCover) {
+    public void setbCover(String bCover) {
         this.bCover = bCover;
     }
 }

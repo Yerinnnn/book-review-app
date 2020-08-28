@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,7 +41,7 @@ import java.util.Date;
 
 public class OCRActivity extends Activity {
 
-    public byte[] bCover;
+    public String bCover;
     public String bScore;
     public String bTitle;
     public String bWriter;
@@ -55,7 +56,7 @@ public class OCRActivity extends Activity {
 
     private ImageView memoOcrImage;
     private TextView memoOcrText;
-    private Button memoBtnSaveOCR;
+    private Button memoBtnOCR, memoBtnSaveOCR;
 
     private TessBaseAPI mTess; //Tess API reference
     private String datapath = "" ;
@@ -79,7 +80,7 @@ public class OCRActivity extends Activity {
         setContentView(R.layout.ocr);
 
         // 책 정보 가져오기
-        bCover = getIntent().getByteArrayExtra("bCover");
+        bCover = getIntent().getStringExtra("bCover");
         bScore = getIntent().getStringExtra("bScore");
         bTitle = getIntent().getStringExtra("bTitle");
         bWriter = getIntent().getStringExtra("bWriter");
@@ -90,6 +91,7 @@ public class OCRActivity extends Activity {
         Log.d(TAG, "getIntent().getStringExtra('bTitle')" + bTitle + "=======================================================================================");
 
         memoOcrImage = findViewById(R.id.ocrImage);
+        memoBtnOCR = findViewById(R.id.ocrButton);
         memoOcrText = findViewById(R.id.ocrText);
         memoBtnSaveOCR = findViewById(R.id.btnSaveOCR);
 
@@ -103,15 +105,6 @@ public class OCRActivity extends Activity {
         Log.d(TAG, "OCRActivity 74 mOCRImage:" + mOcrImage + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
         memoOcrImage.setImageBitmap(mOcrImage);
-
-//        if (mOcrImage != null && !mOcrImage.isRecycled()) {
-//
-//            mOcrImage.recycle();
-//
-//            mOcrImage = null;
-//        }
-
-
 
         // ocr
         //언어파일 경로
@@ -139,6 +132,13 @@ public class OCRActivity extends Activity {
                 else {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        memoBtnOCR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processImage(v);
             }
         });
 
@@ -177,10 +177,11 @@ public class OCRActivity extends Activity {
     //Process an Image
     public void processImage(View view) {
         String OCRresult = null;
-        mTess.setImage(mOcrImage);
+        BitmapDrawable bd = (BitmapDrawable) memoOcrImage.getDrawable();
+        mTess.setImage(bd.getBitmap());
         OCRresult = mTess.getUTF8Text();
-        TextView OCRTextView = findViewById(R.id.ocrText);
-        OCRTextView.setText(OCRresult);
+        Log.d(TAG, "processImage: OCRresult: " + OCRresult);
+        memoOcrText.setText(OCRresult);
     }
 
     //copy file to device

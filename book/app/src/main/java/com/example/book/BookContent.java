@@ -32,7 +32,7 @@ public class BookContent extends AppCompatActivity {
 //    private Memo memo_Main;
 //    public List<Memo> list = new ArrayList<>();
 
-    public byte[] bCover;
+    public String bCover;
     public String bScore;
     public String bTitle;
     public String bWriter;
@@ -49,7 +49,7 @@ public class BookContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_content);
 
-        bCover = getIntent().getByteArrayExtra("bCover");
+        bCover = getIntent().getStringExtra("bCover");
         bScore = getIntent().getStringExtra("bScore");
         bTitle = getIntent().getStringExtra("bTitle");
         bWriter = getIntent().getStringExtra("bWriter");
@@ -93,7 +93,7 @@ public class BookContent extends AppCompatActivity {
 
                     Log.d(TAG, "94 bCover: " + bCover + "**********************************************************************************");
 
-                    bundle.putByteArray("bCover", bCover);
+                    bundle.putString("bCover", bCover);
                     bundle.putString("bScore", bScore);
                     bundle.putString("bTitle", bTitle);
                     bundle.putString("bWriter", bWriter);
@@ -110,7 +110,7 @@ public class BookContent extends AppCompatActivity {
 
                     bundle = new Bundle(1);
 
-                    bundle.putByteArray("bCover", bCover);
+                    bundle.putString("bCover", bCover);
                     bundle.putString("bScore", bScore);
                     bundle.putString("bTitle", bTitle);
                     bundle.putString("bWriter", bWriter);

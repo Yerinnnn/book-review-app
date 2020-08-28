@@ -37,7 +37,7 @@ public class book_content extends Fragment {
     private TextView bookFinishDate;
     private TextView bookComment;
 
-    private byte[] bCover;
+    private String bCover;
     private String bScore;
     private String bTitle;
     private String bWriter;
@@ -67,7 +67,7 @@ public class book_content extends Fragment {
         bookFinishDate = view.findViewById(R.id.bookFinishDate);
         bookComment = view.findViewById(R.id.bookComment);
 
-        bCover = getArguments().getByteArray("bCover");
+        bCover = getArguments().getString("bCover");
         bScore = getArguments().getString("bScore");
         bTitle = getArguments().getString("bTitle");
         bWriter = getArguments().getString("bWriter");
@@ -79,7 +79,7 @@ public class book_content extends Fragment {
         Log.d(TAG, "book_content 79 getArguments() bCover: " + bCover + bTitle + "============================================================================");
 
 //        bitmap = BitmapFactory.decodeByteArray(bCover, 0, bCover.length);
-        bookCover.setImageBitmap(BitmapFactory.decodeByteArray(bCover, 0, bCover.length));
+        bookCover.setImageURI(Uri.parse(bCover));
         bookRatingBar.setRating(Float.parseFloat(bScore));
         bookScore.setText(bScore);
         bookTitle.setText(bTitle);

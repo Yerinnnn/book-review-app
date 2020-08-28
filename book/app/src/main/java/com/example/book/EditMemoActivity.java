@@ -43,7 +43,7 @@ public class EditMemoActivity extends Activity {
 
     public String mContent;
 
-    public byte[] bCover;
+    public String bCover;
     public String bScore;
     public String bTitle;
     public String bWriter;
@@ -69,7 +69,7 @@ public class EditMemoActivity extends Activity {
         setContentView(R.layout.add_edit_memo);
 
         // 책 정보 가져오기
-        bCover = getIntent().getByteArrayExtra("bCover");
+        bCover = getIntent().getStringExtra("bCover");
         bScore = getIntent().getStringExtra("bScore");
         bTitle = getIntent().getStringExtra("bTitle");
         bWriter = getIntent().getStringExtra("bWriter");
@@ -212,6 +212,7 @@ public class EditMemoActivity extends Activity {
         if (tempFile == null) {
             try {
                 tempFile = createImageFile();
+
             } catch (IOException e) {
                 Toast.makeText(this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                 finish();

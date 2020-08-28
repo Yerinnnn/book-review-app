@@ -2,6 +2,7 @@ package com.example.book;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,21 +96,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return viewHolder;
     }
 
-    public Bitmap getBookCover(BookCoverList bList) {
-        byte[] list = bList.getbCover();
-
-        Bitmap bitmap = BitmapFactory.decodeByteArray(list, 0, list.length);
-        // offset: 배열의 시작점
-
-//        ByteArrayInputStream in; in.read(b); Bitmap bitmap = BitmapFactory.decodeStream(in);
-
-        return bitmap;
-    }
-
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder bookViewHolder, int position) {
         bookViewHolder.bookScore.setText(bList.get(position).getbScore());
-        bookViewHolder.bookCover.setImageBitmap(getBookCover(bList.get(position)));
+        bookViewHolder.bookCover.setImageURI(Uri.parse(bList.get(position).getbCover()));
 }
 
     @Override

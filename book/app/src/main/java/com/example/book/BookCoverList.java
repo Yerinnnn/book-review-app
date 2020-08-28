@@ -1,11 +1,13 @@
 package com.example.book;
 
 
+import android.net.Uri;
+
 public class BookCoverList {
     private String bScore;
-    private byte[] bCover;
+    private String bCover;
 
-    public BookCoverList(String bScore, byte[] bCover) {
+    public BookCoverList(String bScore, String bCover) {
         this.bScore = bScore;
         this.bCover = bCover;
     }
@@ -18,11 +20,11 @@ public class BookCoverList {
         this.bScore = bScore;
     }
 
-    public byte[] getbCover() {
+    public String getbCover() {
         return bCover;
     }
 
-    public void setbCover(byte[] bCover) {
+    public void setbCover(String bCover) {
         this.bCover = bCover;
     }
 }

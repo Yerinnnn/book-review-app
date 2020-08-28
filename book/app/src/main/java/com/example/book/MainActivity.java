@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<BookCoverList> bBookCoverList;
     private ArrayList<Book> bArrayList;
 
-    private byte[] bCover;
+    private String bCover;
     private String bScore;
     private String bTitle;
     private String bWriter;

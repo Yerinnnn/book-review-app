@@ -26,7 +26,7 @@ public class memo_list extends Fragment {
 
     private static final String TAG = "memo_list";
 
-    public byte[] bCover;
+    public String bCover;
     public String bScore;
     public String bTitle;
     public String bWriter;
@@ -51,7 +51,7 @@ public class memo_list extends Fragment {
         MemoDBHelper memoDbHelper = new MemoDBHelper(getContext(), "memo", null, 1);
 
         // 책 정보 가져오기
-        bCover = getArguments().getByteArray("bCover");
+        bCover = getArguments().getString("bCover");
         bScore = getArguments().getString("bScore");
         bTitle = getArguments().getString("bTitle");
         bWriter = getArguments().getString("bWriter");
